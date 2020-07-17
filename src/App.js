@@ -1,11 +1,12 @@
 import React from 'react';
-import StopWatch from './components/StopWatch';
+import StopWatch from './components/StopWatch/StopWatch';
 import './App.css'
+import Timer from './components/Timer/Timer';
 
 function App() {
   return (
     <div className="App">
-      <StopWatch />
+      <Timer />
     </div>
   );
 }

@@ -5,6 +5,7 @@
 
 .StopWatch .Time {
     font-size: 2em;
+    font-weight: bold;
 }
 
 .StopWatch .ButtonsContainer {
@@ -13,7 +14,7 @@
     margin-bottom: 50px;
 }
 
-.StopWatchButton {
+.StopWatch .StopWatchButton {
     font-weight: 400;
     font-size: 1.5em;
 }

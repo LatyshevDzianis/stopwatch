@@ -1,0 +1,21 @@
+.Timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Timer .TimeContainer {
+    margin: 100px 0;
+}
+
+.Timer .Time {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.Timer .TimerButton {
+    font-weight: 400;
+    font-size: 1.5em;
+    margin-bottom: 100px;
+}

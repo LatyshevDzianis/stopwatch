@@ -47,9 +47,9 @@ function StopWatch() {
         <span className="Time">{`${minutes}:${seconds}.${milliseconds}`}</span>
       </div>
       <div className="ButtonsContainer">
-        <button onClick={handleLoopClick} className="StopWatchButton">Круг</button>
-        <button onClick={handleStartClick} className="StopWatchButton">Старт</button>
-        <button onClick={handleStopClick} className="StopWatchButton">Стоп</button>
+        <button onClick={handleLoopClick} className="StopWatchButton">КРУГ</button>
+        <button onClick={handleStartClick} className="StopWatchButton">СТАРТ</button>
+        <button onClick={handleStopClick} className="StopWatchButton">СТОП</button>
       </div>
       <Loops loops={loops} handleLoopClick={handleLoopClick}/>
     </div>
