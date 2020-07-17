@@ -3,6 +3,8 @@ import './StopWatch.css'
 import Loops from './Loops';
 
 function StopWatch() {
+  const [isPaused, setIsPaused] = useState(false)
+  const [isRunning, setIsRunning] = useState(false)
   const [timerId, setTimerId] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
@@ -26,15 +28,26 @@ function StopWatch() {
 
   const handleStartClick = () => {
     setTimerId(setInterval(tick, 10))
+    setIsRunning(true)
+    setIsPaused(false)
   }
 
   const handleStopClick = () => {
-    console.log(timerId)
+    if (isPaused) {
+      clearInterval(timerId)
+      setMinutes(0)
+      setSeconds(0)
+      setMilliseconds(0)
+      setLoops([])
+    } else {
+      setIsPaused(true)
+    }
+    setIsRunning(false)
     clearInterval(timerId)
   }
 
   const handleLoopClick = () => {
-    let currentTime = `${minutes}:${seconds}.${milliseconds}`
+    let currentTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
     setLoops([
       ...loops,
       currentTime
@@ -44,12 +57,16 @@ function StopWatch() {
   return (
     <div className="StopWatch">
       <div className="TimeContainer">
-        <span className="Time">{`${minutes}:${seconds}.${milliseconds}`}</span>
+        <span className="Time">
+          {
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
+          }
+        </span>
       </div>
       <div className="ButtonsContainer">
-        <button onClick={handleLoopClick} className="StopWatchButton">КРУГ</button>
-        <button onClick={handleStartClick} className="StopWatchButton">СТАРТ</button>
-        <button onClick={handleStopClick} className="StopWatchButton">СТОП</button>
+        <button onClick={handleLoopClick} className="StopWatchButton" disabled={!isRunning}>КРУГ</button>
+        <button onClick={handleStartClick} disabled={isRunning} className="StopWatchButton">СТАРТ</button>
+        <button onClick={handleStopClick} className="StopWatchButton">{isRunning ? 'Пауза' : 'Стоп'}</button>
       </div>
       <Loops loops={loops} handleLoopClick={handleLoopClick}/>
     </div>

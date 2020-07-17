@@ -5,7 +5,7 @@ import './Timer.css'
 
 function Timer() {
   const [play] = useSound(endSound)
-  const [done, setDone] = useState(false)
+  const [done, setDone] = useState(true)
   const [timerId, setTimerId] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
@@ -24,6 +24,7 @@ function Timer() {
       if (timerId) {
         clearInterval(timerId)
         setTimerId(0)
+        setDone(true)
         play()
       }
     }
@@ -50,8 +51,10 @@ function Timer() {
   }
 
   const handleSetClick = () => {
-    setDone(false)
-    setTimerId(setInterval(tick, 10))
+    if (done) {
+      setDone(false)
+      setTimerId(setInterval(tick, 10))
+    }
   }
 
   return (
@@ -62,7 +65,11 @@ function Timer() {
         <input onChange={handleInputChange} placeholder="миллисекунды" type='number' name="milliseconds"/>
       </div>
       <div className="TimeContainer">
-        <span className="Time">{`${minutes}:${seconds}.${milliseconds}`}</span>
+        <span className="Time">
+          {
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
+          }
+        </span>
       </div>
       <button onClick={handleSetClick} className="TimerButton">ЗАДАТЬ</button>
     </div>
